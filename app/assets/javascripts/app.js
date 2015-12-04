@@ -1,4 +1,5 @@
-angular.module('catalog', ['ui.router'])
+angular.module('catalog',
+  ['ui.router', 'angularUtils.directives.dirPagination'])
 .config([
 '$stateProvider',
 '$urlRouterProvider',
@@ -32,20 +33,6 @@ function($stateProvider, $urlRouterProvider) {
 '$scope', 'products',
 function($scope, products){
   $scope.products = products.products;
-  $scope.addProduct = function(){
-    if(!$scope.name || $scope.name === '' ||
-       !$scope.description || $scope.description === '' ||
-       !$scope.price || $scope.price === '') { return; }
-
-    products.create({
-      name: $scope.name,
-      description: $scope.description,
-      price: $scope.price
-    });
-    $scope.name = '';
-    $scope.description = '';
-    $scope.price = '';
-  };
 }])
 .controller('ProductsCtrl', [
 '$scope',
@@ -65,11 +52,6 @@ function($scope, product){
   o.get = function(id) {
     return $http.get('/products/' + id + '.json').then(function(res){
       return res.data;
-    });
-  };
-  o.create = function(product) {
-    return $http.product('/products.json', product).success(function(data){
-      o.products.push(data);
     });
   };
   return o;
