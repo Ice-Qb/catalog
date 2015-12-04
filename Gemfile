@@ -17,6 +17,8 @@ gem 'angular-rails-templates'
 gem 'angular_rails_csrf'
 gem 'inherited_resources'
 gem 'responders', '~> 2.0'
+gem 'slim'
+gem 'coffee-rails', '~> 4.0.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
