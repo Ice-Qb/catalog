@@ -6,9 +6,56 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body ng-app="catalog">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <ui-view></ui-view>
+    </div>
+  </div>
 
-<%= yield %>
+  <script type="text/ng-template" id="/root.html">
+    <div class="page-header">
+      <h1>Catalog</h1>
+    </div>
+
+    <div ng-repeat="product in products">
+      <div style="font-size:20px;">
+        <a href="#/products/{{product.id}}">{{product.name}}</a>
+        <p>Description: <small>{{product.description}}</small></p>
+        <p>Price: <small>{{product.price | currency}}</small></p>
+      </div>
+    </div>
+     <form ng-submit="addProduct()"
+      style="margin-top:30px;">
+      <h3>Add a new product</h3>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Name"
+        ng-model="name"></input>
+      </div>
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Description"
+        ng-model="description"></input>
+      </div>
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Price"
+        ng-model="price"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+  </script>
+
+  <script type="text/ng-template" id="/products.html">
+    <h3 class="page-header">{{product.name}}</h3>
+    <p>Description: <small>{{product.description}}</small></p>
+    <p>Price: <small>{{product.price | currency}}</small></p>
+  </script>
 
 </body>
 </html>
